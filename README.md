@@ -46,17 +46,23 @@ Additional parameters can be tuned in `breaktag/pipelines/essential.vars.groovy`
 Important parameters are included in this file. They're distributed in several sections.
 
 ### General parameters
+```
 ESSENTIAL_PROJECT="/project/folder"
 ESSENTIAL_SAMPLE_PREFIX="" 
 ESSENTIAL_THREADS=16
+```
 
 ### Mapping parameters
+```
 ESSENTIAL_BWA_REF="/ref/index/bwa/hg38.fa"  // BWA index of the reference genome
 ESSENTIAL_PAIRED="yes"        // paired end design
 ESSENTIAL_QUALITY=60          // min mapping quality of reads to be kept. Defaults to 60 (discarding multimappers and low quality mapping)
+```
 
 ### Other
+```
 RUN_IN_PAIRED_END_MODE=(ESSENTIAL_PAIRED == "yes")
+```
 
 More fine-grained tunning of the tools called by the pipeline can be controled from the `.header` files in the `breaktag/modules` folder.
 
