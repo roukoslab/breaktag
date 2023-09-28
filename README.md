@@ -8,6 +8,31 @@ Some steps of the pipeline are based on the [blissNP pipeline](https://github.co
 - identify and remove duplicate reads with a custom approach which identifies duplicated reads with "close" UMIs (as in the original [blissNP pipeline](https://github.com/BiCroLab/blissNP)).
 - generation of bigWig tracks for visualisation of alignment with deeptools bamCoverage. For single end design, reads are extended to the average fragment size.
 
+## Installing the pipeline
+### Docker installation
+This repositori contains a `Dockerfile` which can be used to create a Docker image with all dependencies.
+
+### Manual installation
+Install and make available in the path the following dependencies:
+- Bpipe
+- Bedtools
+- BWA
+- FastQC
+- MultiQC
+- Samtools
+- Several unix standard tools (perl5, python3, awk, etc.)
+
+## Runing the pipeline
+Tools are expected to be in the PATH. From the root of the folder where you clone the breaktag pipeline:
+
+- edit the parameters file `breaktag/pipelines/essential.vars.groovy`
+- edit the targets file `breaktag/pipelines/targets.txt`
+- softlink these 2 files to the root folder `ln -s breaktag/pipelines/essential.vars.groovy . && ln -s breaktag/pipelines/targets.txt .`
+- run the pipeline with this command (eg. from within the docker container):
+```
+bpipe run -n256 breaktag/pipelines/breaktag.pipeline.groovy rawdata/*.fastq.gz
+```
+
 ## Pipeline-specific parameter settings (files you need to setup in order to run the pipeline):
 - `targets.txt`: tab-separated txt-file giving information about the analysed samples. The following columns are required
   - name: sample name. Experiment ID found in fastq filename: expID_R1.fastq.gz
@@ -21,52 +46,32 @@ Some steps of the pipeline are based on the [blissNP pipeline](https://github.co
   - ESSENTIAL_PAIRED: either paired end ("yes") or single read ("no") design
   - ESSENTIAL_QUALITY: minimum mapping quality desired
 
-## Programs required
-- Bpipe
-- Bedtools
-- BWA
-- FastQC
-- MultiQC
-- Samtools
-- Several unix standard tools (perl5, python3, awk, etc.)
-
-## Example usage
-Tools are expected to be in the PATH.
-From the root of the folder where you clone the breaktag pipeline, run it with this command:
-
-```sh
-bpipe run -n256 breaktag/pipelines/breaktag.pipeline.groovy rawdata/*.fastq.gz
-```
-
-The breaktag pipeline takes one unique parameter, which is the list of FASTQ files to process.
-Additional parameters can be tuned in `breaktag/pipelines/essential.vars.groovy`
-
-## breaktag ESSENTIAL VARIABLES
+### breaktag ESSENTIAL VARIABLES
 
 Important parameters are included in this file. They're distributed in several sections.
 
-### General parameters
+#### General parameters
 ```
 ESSENTIAL_PROJECT="/project/folder"
 ESSENTIAL_SAMPLE_PREFIX="" 
 ESSENTIAL_THREADS=16
 ```
 
-### Mapping parameters
+#### Mapping parameters
 ```
 ESSENTIAL_BWA_REF="/ref/index/bwa/hg38.fa"  // BWA index of the reference genome
 ESSENTIAL_PAIRED="yes"        // paired end design
 ESSENTIAL_QUALITY=60          // min mapping quality of reads to be kept. Defaults to 60 (discarding multimappers and low quality mapping)
 ```
 
-### Other
+#### Other
 ```
 RUN_IN_PAIRED_END_MODE=(ESSENTIAL_PAIRED == "yes")
 ```
 
 More fine-grained tunning of the tools called by the pipeline can be controled from the `.header` files in the `breaktag/modules` folder.
 
-## Targets file
+### Targets file
 
 A tab-separated file with the filenames (excluding the .fastq.gz extension) and the breaktag barcode and the position of the UMI within the read.
 
