@@ -23,7 +23,7 @@ Install and make available in the path the following dependencies:
 - Samtools
 - Several unix standard tools (perl5, python3, awk, etc.)
 
-## Runing the pipeline
+## Running the pipeline
 Tools are expected to be in the PATH. From the root of the folder where you clone the [breaktag pipeline](git@github.com:roukoslab/breaktag.git):
 
 - edit the parameters file `breaktag/pipelines/essential.vars.groovy`
