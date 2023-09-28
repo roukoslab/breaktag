@@ -6,6 +6,7 @@ tools_defaults = [
     bwa     : [ runenv: "default", version: "0.7.17"],
     fastqc  : [ runenv: "default", version: "0.11.9"],
     multiqc : [ runenv: "default", version: "1.9"   ],
+    python  : [ runenv: "default", version: "3.6"   ],
     samtools: [ runenv: "default", version: "1.10"  ]
 ]
 
@@ -32,6 +33,11 @@ tools_envs = [
     ],
     multiqc: [
         "1.9": [
+            default: ":"
+        ]
+    ],
+    python: [
+        "3.6": [
             default: ":"
         ]
     ],
