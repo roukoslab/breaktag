@@ -10,7 +10,8 @@ Some steps of the pipeline are based on the [blissNP pipeline](https://github.co
 
 ## Installing the pipeline
 ### Docker installation
-This repositori contains a `Dockerfile` which can be used to create a Docker image with all dependencies.
+This repository contains a `Dockerfile` which can be used to create a Docker image with all dependencies.
+This is the preferred and easiest way to have all the dependencies satisfied and run the pipeline.
 
 ### Manual installation
 Install and make available in the path the following dependencies:
@@ -23,14 +24,14 @@ Install and make available in the path the following dependencies:
 - Several unix standard tools (perl5, python3, awk, etc.)
 
 ## Runing the pipeline
-Tools are expected to be in the PATH. From the root of the folder where you clone the breaktag pipeline:
+Tools are expected to be in the PATH. From the root of the folder where you clone the [breaktag pipeline](git@github.com:roukoslab/breaktag.git):
 
 - edit the parameters file `breaktag/pipelines/essential.vars.groovy`
 - edit the targets file `breaktag/pipelines/targets.txt`
 - softlink these 2 files to the root folder `ln -s breaktag/pipelines/essential.vars.groovy . && ln -s breaktag/pipelines/targets.txt .`
 - run the pipeline with this command (eg. from within the docker container):
 ```
-bpipe run -n256 breaktag/pipelines/breaktag.pipeline.groovy rawdata/*.fastq.gz
+bpipe run -n256 breaktag/pipelines/breaktag/breaktag.pipeline.groovy rawdata/*.fastq.gz
 ```
 
 ## Pipeline-specific parameter settings (files you need to setup in order to run the pipeline):
