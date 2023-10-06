@@ -28,7 +28,7 @@ Tools are expected to be in the PATH. From the root of the folder where you clon
 
 - edit the parameters file `breaktag/pipelines/breaktag/essential.vars.groovy`
 - edit the targets file `breaktag/pipelines/breaktag/targets.txt`
-- softlink these 2 files to the root folder `ln -s breaktag/pipelines/essential.vars.groovy . && ln -s breaktag/pipelines/targets.txt .`
+- softlink these 2 files to the root folder `ln -s breaktag/pipelines/breaktag/essential.vars.groovy . && ln -s breaktag/pipelines/breaktag/targets.txt .`
 - run the pipeline with this command (eg. from within the docker container):
 ```
 bpipe run -n256 breaktag/pipelines/breaktag/breaktag.pipeline.groovy rawdata/*.fastq.gz
