@@ -2,11 +2,24 @@
 Here we provide the tools to perform paired end or single read BreakTag raw data processing. The pipeline is also valid for (s)BLISS data. As input files you may use either gzipped fastq-files (.fastq.gz) or mapped read data (.bam files). In case of paired end reads, corresponding fastq files should be named using *.R1.fastq.gz* and *.R2.fastq.gz* suffixes. 
 Some steps of the pipeline are based on the [blissNP pipeline](https://github.com/BiCroLab/blissNP) developed at the BriCo lab for BLISS data.
 
-## The pipeline includes the following steps
-- raw data quality control with FastQC, BamQC and MultiQC.
-- mapping reads or read pairs to the reference genome using bwa.
-- identify and remove duplicate reads with a custom approach which identifies duplicated reads with "close" UMIs (as in the original [blissNP pipeline](https://github.com/BiCroLab/blissNP)).
-- generation of bigWig tracks for visualisation of alignment with deeptools bamCoverage. For single end design, reads are extended to the average fragment size.
+## Overall description
+
+![breakinspectoR workflow](assets/breakinspectoR_wf.png)
+
+### Initial preprocessing
+
+Initial preprocessing is typically done in a linux cluster using the [Breaktag pipeline](https://github.com/roukoslab/breaktag). It includes the following steps:
+
+1. scanning for reads (single- or paired-end) containing the expected 8-nt UMI followed by the 8-nt sample barcode in the 5' end of read 1.
+2. alignment of reads to reference genome with BWA, with a seed length of 19 and default scoring/penalty values for mismatches, gaps and read clipping.
+3. reads mapped with a minimum quality score Q (defaults to Q=60) are retained.
+4. close spatial consecutive reads within a window of 30 nucleotides and UMI differing with up to 2 mismatches are considered PCR duplicates and only one is kept.
+    
+The resulting reads are aggregated per position and reported as a BED file.
+    
+### breakinspectoR analysis
+
+This R package implements the identification of CRISPR (currently, Cas9 only) targets and estimation of the scission profile. Additionally it provides several plotting functions to graphically summarize the results.
 
 ## Installing the pipeline
 ### Docker installation
