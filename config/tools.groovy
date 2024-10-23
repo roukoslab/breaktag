@@ -15,10 +15,12 @@ tools_defaults = [
 //   * 1st level: tool name
 //   * 2nd level: version --> version *string*
 //   * 3rd level: runenv  --> one of [default]
+// Then, the shell string which puts the tool in PATH. ":" means "do nothing, the tool is already in $PATH".
+// Otherwise, the string could look like: "export PATH=$PATH:/opt/bwa/bin" or "module load bwa/0.7.17"
 tools_envs = [
     bedtools: [
         "2.27": [
-            default: ":"
+            default: ":"    // for instance, if bedtools is installed in `/opt/bedtools`, then replace ":" with "export PATH=$PATH:/opt/bedtools"
         ]
     ],
     bwa: [

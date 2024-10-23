@@ -14,6 +14,7 @@ ESSENTIAL_BWA_REF="/fsimb/common/genomes/homo_sapiens/ucsc/hg38/canonical/index/
 ESSENTIAL_PAIRED="no"        // paired end design
 ESSENTIAL_QUALITY=60          // min mapping quality of reads to be kept. Defaults to 60
 
+// NOTE: you probably don't need to touch anything beyond this point
 // further optional pipeline stages to include
 RUN_IN_PAIRED_END_MODE=(ESSENTIAL_PAIRED == "yes")
 

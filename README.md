@@ -27,6 +27,7 @@ This repository contains a `Dockerfile` which can be used to create a Docker ima
 This is the preferred and easiest way to have all the dependencies satisfied and run the pipeline.
 
 ### Manual installation
+
 Install and make available in the path the following dependencies:
 - Bpipe
 - Bedtools
@@ -36,7 +37,10 @@ Install and make available in the path the following dependencies:
 - Samtools
 - Several unix standard tools (perl5, python3, awk, etc.)
 
+If you're running the pipeline in a cluster, you probably want to edit the [tools config file](https://github.com/roukoslab/breaktag/blob/main/config/tools.groovy) and tell the pipeline how these tools are loaded (added in \$PATH).
+
 ## Running the pipeline
+
 Tools are expected to be in the PATH. From the root of the folder where you clone the [breaktag pipeline](git@github.com:roukoslab/breaktag.git):
 
 - edit the parameters file `breaktag/pipelines/breaktag/essential.vars.groovy`
@@ -48,6 +52,7 @@ bpipe run -n256 breaktag/pipelines/breaktag/breaktag.pipeline.groovy rawdata/*.f
 ```
 
 ## Pipeline-specific parameter settings (files you need to setup in order to run the pipeline):
+
 - `targets.txt`: tab-separated txt-file giving information about the analysed samples. The following columns are required
   - name: sample name. Experiment ID found in fastq filename: expID_R1.fastq.gz
   - pattern: UMI+barcode pattern file used in the linker
@@ -65,6 +70,7 @@ bpipe run -n256 breaktag/pipelines/breaktag/breaktag.pipeline.groovy rawdata/*.f
 Important parameters are included in this file. They're distributed in several sections.
 
 #### General parameters
+
 ```
 ESSENTIAL_PROJECT="/project/folder"
 ESSENTIAL_SAMPLE_PREFIX="" 
@@ -72,6 +78,7 @@ ESSENTIAL_THREADS=16
 ```
 
 #### Mapping parameters
+
 ```
 ESSENTIAL_BWA_REF="/ref/index/bwa/hg38.fa"  // BWA index of the reference genome
 ESSENTIAL_PAIRED="yes"        // paired end design
@@ -79,8 +86,24 @@ ESSENTIAL_QUALITY=60          // min mapping quality of reads to be kept. Defaul
 ```
 
 #### Other
+
+You probably don't need to touch these lines:
+
 ```
+// further optional pipeline stages to include
 RUN_IN_PAIRED_END_MODE=(ESSENTIAL_PAIRED == "yes")
+
+// project folders
+PROJECT=ESSENTIAL_PROJECT
+LOGS=PROJECT + "/logs"
+MAPPED=PROJECT + "/mapped"
+QC=PROJECT + "/qc"
+RAWDATA=PROJECT + "/rawdata"
+REPORTS=PROJECT + "/reports"
+RESULTS=PROJECT + "/results"
+TMP=PROJECT + "/tmp"
+TRACKS=PROJECT + "/tracks"
+TARGETS=PROJECT + "/targets.txt"
 ```
 
 More fine-grained tunning of the tools called by the pipeline can be controled from the `.header` files in the `breaktag/modules` folder.
