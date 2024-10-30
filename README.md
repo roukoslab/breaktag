@@ -124,6 +124,8 @@ NT_rep2	^(........)(.TCACACGT|C.CACACGT|CT.ACACGT|CTC.CACGT|CTCA.ACGT|CTCAC.CGT|
 
 For your set of gRNAs, you may want to run the prediction of blunt rates of Streptococcus pyogenes Cas9 (SpCas9) using the XGBoost model trained with HiPlex1 data.
 
+![bluntPred](assets/bluntPred.png)
+
 ### Dependencies
 
 The main dependency is [H2O](https://h2o.ai/).
