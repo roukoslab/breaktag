@@ -47,7 +47,7 @@ Tools are expected to be in the PATH. From the root of the folder where you clon
 - edit the targets file `breaktag/pipelines/breaktag/targets.txt`
 - softlink these 2 files to the root folder `ln -s breaktag/pipelines/breaktag/essential.vars.groovy . && ln -s breaktag/pipelines/breaktag/targets.txt .`
 - run the pipeline with this command (eg. from within the docker container):
-```
+```sh
 bpipe run -n256 breaktag/pipelines/breaktag/breaktag.pipeline.groovy rawdata/*.fastq.gz
 ```
 
@@ -71,7 +71,7 @@ Important parameters are included in this file. They're distributed in several s
 
 #### General parameters
 
-```
+```groovy
 ESSENTIAL_PROJECT="/project/folder"
 ESSENTIAL_SAMPLE_PREFIX="" 
 ESSENTIAL_THREADS=16
@@ -79,7 +79,7 @@ ESSENTIAL_THREADS=16
 
 #### Mapping parameters
 
-```
+```groovy
 ESSENTIAL_BWA_REF="/ref/index/bwa/hg38.fa"  // BWA index of the reference genome
 ESSENTIAL_PAIRED="yes"        // paired end design
 ESSENTIAL_QUALITY=60          // min mapping quality of reads to be kept. Defaults to 60 (discarding multimappers and low quality mapping)
@@ -89,7 +89,7 @@ ESSENTIAL_QUALITY=60          // min mapping quality of reads to be kept. Defaul
 
 You probably don't need to touch these lines:
 
-```
+```groovy
 // further optional pipeline stages to include
 RUN_IN_PAIRED_END_MODE=(ESSENTIAL_PAIRED == "yes")
 
