@@ -1,4 +1,4 @@
-FROM condaforge/mambaforge:latest
+FROM docker://condaforge/mambaforge:latest
 
 LABEL org.opencontainers.image.authors="roukoslab" \
       org.opencontainers.image.title="breaktag" \
