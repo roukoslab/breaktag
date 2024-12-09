@@ -7,13 +7,13 @@ config {
   commands {
     BWA_pe {
       walltime="24:00:00"
-      procs="16"
-      memory="32"
+      procs="4"
+      memory="16"
     }
     collectBpipeLogs {
       walltime="00:45:00"
       procs="1"
-      memory="64"
+      memory="4"
     }
     count_breaks {
       walltime="04:00:00"
@@ -33,7 +33,7 @@ config {
     MULTIQC {
       walltime="12:00:00"
       procs="4"
-      memory="128"
+      memory="16"
     }
     pattern_filtering {
       walltime="04:00:00"
